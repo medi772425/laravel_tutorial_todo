@@ -37,6 +37,7 @@ class Task extends Model
         return self::STATUS[$status]['class'];
     }
 
+    // アクセサ get○○cAttribute の形式で記述する。呼び出す際は、○○○のところをスネークケースで。この場合、formatted_due_date()になる
     public function getFormattedDueDateAttribute()
     {
         return Carbon::createFromFormat('Y-m-d', $this->attributes['due_date'])->format('Y/m/d');
