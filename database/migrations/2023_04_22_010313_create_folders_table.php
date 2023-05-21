@@ -13,6 +13,7 @@ class CreateFoldersTable extends Migration
      */
     public function up()
     {
+        // create()  foldersテーブルを作成
         Schema::create('folders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 20);
