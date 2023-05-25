@@ -6,12 +6,15 @@ use App\Folder;
 use App\Task;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     public function index(int $id)
     {
-        $folders = Folder::all();
+        // ログインユーザが持つフォルダのみを取得
+        $folders = Auth::user()->folders()->get();
+        // // // $folders = Folder::all();
 
         $current_folder = Folder::find($id);
 
@@ -61,11 +64,6 @@ class TaskController extends Controller
     {
         //  
         $task = Task::find($task_id);
-
-        // TODO
-        \Log::debug($id);
-        \Log::debug($task_id);
-        \Log::debug($request);
 
         $task->title = $request->title;
         $task->due_date = $request->due_date;
